@@ -256,6 +256,135 @@
       font-size: 12.5px; letter-spacing: 1.5px; cursor: pointer; transition: all .2s;
     }
     .btn-ghost:hover { border-color: rgba(237,229,212,.5); color: rgba(237,229,212,.9); }
+
+    /* ── BOOKING PAGE ── */
+    #book-page {
+      position: fixed; inset: 0; z-index: 3000;
+      background: #0f0d08; display: none; overflow-y: auto;
+    }
+    .book-inner { max-width: 580px; margin: 0 auto; padding: 0 2rem 5rem; }
+    .book-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2.5rem; border-bottom: 1px solid rgba(200,150,60,.18);
+      margin-bottom: 2.5rem;
+    }
+    .book-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
+      color: #ede5d4; margin-bottom: 0.4rem;
+    }
+    .book-subhead {
+      font-size: 11px; letter-spacing: 3px;
+      color: rgba(237,229,212,.3); margin-bottom: 2.5rem;
+    }
+    .cal-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .cal-month-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: #ede5d4;
+    }
+    .cal-nav-btn {
+      background: none; border: none; color: rgba(237,229,212,.4);
+      font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 0 6px;
+      transition: color .2s;
+    }
+    .cal-nav-btn:hover { color: #c8963c; }
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7,1fr);
+      margin-bottom: 4px;
+    }
+    .cal-weekdays span {
+      text-align: center; font-size: 9px; letter-spacing: 1.5px;
+      color: rgba(237,229,212,.22); padding: 4px 0;
+    }
+    .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: rgba(237,229,212,.18); border-radius: 2px;
+    }
+    .cal-day.in-month { color: rgba(237,229,212,.38); }
+    .cal-day.has-event {
+      color: #c8963c; cursor: pointer; font-weight: 500;
+      background: rgba(200,150,60,.1);
+      border: 1px solid rgba(200,150,60,.28);
+      transition: background .15s;
+    }
+    .cal-day.has-event:hover { background: rgba(200,150,60,.2); }
+    .cal-day.has-event.active { background: rgba(200,150,60,.28); border-color: #c8963c; }
+    .cal-detail { margin-top: 2rem; }
+    .cal-detail-heading {
+      font-size: 10px; letter-spacing: 3px;
+      color: rgba(237,229,212,.28); margin-bottom: 0.85rem;
+      padding-top: 1.5rem; border-top: 1px solid rgba(200,150,60,.15);
+    }
+    .event-card {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #1e1a12; padding: 1rem 1.25rem; margin-bottom: 6px;
+    }
+    .event-card-name {
+      font-family: 'Playfair Display', serif; font-size: 1rem; color: #ede5d4;
+      margin-bottom: 3px;
+    }
+    .event-card-meta { font-size: 11px; letter-spacing: 1px; color: #c8963c; }
+    .event-card-spots { font-size: 11px; color: rgba(237,229,212,.28); margin-top: 2px; }
+    .divider { border: none; border-top: 1px solid rgba(200,150,60,.12); margin: 3rem 0; }
+    .private-block { text-align: center; }
+    .private-block h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      color: #ede5d4; margin-bottom: 0.75rem;
+    }
+    .private-block p {
+      font-size: 14px; color: rgba(237,229,212,.48); line-height: 1.65;
+      max-width: 380px; margin: 0 auto 1.5rem;
+    }
+    .nbh-ctas-private {
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      padding-top: 0.5rem;
+    }
+    .nbh-ctas-private .btn-ghost { width: 100%; max-width: 320px; text-align: center; }
+
+    /* ── STATIC PAGES (About, Resources) ── */
+    #about-page, #resources-page {
+      position: fixed; inset: 0; z-index: 3000;
+      background: #0f0d08; display: none; overflow-y: auto;
+    }
+    .about-body p {
+      font-size: 16px; line-height: 1.8; color: rgba(237,229,212,.75);
+      margin-bottom: 1.4rem; max-width: 520px;
+    }
+    .about-body p:first-child {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem;
+      font-style: italic; color: #ede5d4; line-height: 1.5;
+    }
+    .resources-section { margin-bottom: 2.5rem; }
+    .resources-heading {
+      font-size: 10px; letter-spacing: 3px; color: rgba(237,229,212,.3);
+      margin-bottom: 1rem; padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(200,150,60,.15);
+    }
+    .resources-list { list-style: none; padding: 0; margin: 0; }
+    .resources-list li { border-bottom: 1px solid rgba(200,150,60,.08); }
+    .resource-link {
+      display: block; padding: 1rem 0; text-decoration: none;
+      transition: padding-left .2s;
+    }
+    .resource-link:hover { padding-left: 6px; }
+    .resource-title {
+      display: block; font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: #ede5d4; margin-bottom: 3px;
+    }
+    .resource-link:hover .resource-title { color: #c8963c; }
+    .resource-desc {
+      display: block; font-size: 12px; line-height: 1.6;
+      color: rgba(237,229,212,.4);
+    }
+    .resource-placeholder { padding: 0.8rem 0; }
+    .resource-placeholder .resource-title {
+      font-size: 12px; font-family: 'Inter', sans-serif;
+      color: rgba(237,229,212,.2); font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -450,7 +579,7 @@
     <!-- Braddock -->
     <div class="arch-wrap" id="arch-braddock" onclick="enterArch('braddock')" role="button" tabindex="0" aria-label="Explore Braddock tour">
       <div class="arch-clip">
-        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/new-braddock.jpg'); background-position: 35% center;"></div>
+        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/new-braddock.jpg'); background-position: 50% center;"></div>
         <div class="arch-fade"></div>
       </div>
       <svg class="arch-label-svg" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
@@ -472,10 +601,10 @@
 
   <!-- Footer links -->
   <div class="home-footer">
-    <a href="#">About</a>
-    <a href="#">Book a tour</a>
-    <a href="#">Resources</a>
-    <a href="#">Contact</a>
+    <a href="#" onclick="openCalendar(); return false;">Book a Tour</a>
+    <a href="#" onclick="openPage('about-page'); return false;">About</a>
+    <a href="#" onclick="openPage('resources-page'); return false;">Resources</a>
+    <a href="mailto:storiesofsteelpgh@gmail.com">Contact</a>
   </div>
 
 </div>
@@ -519,6 +648,120 @@
   </defs>
 </svg>
 
+<!-- ═══════════════════════ ABOUT PAGE ═══════════════════════ -->
+<div id="about-page">
+  <nav class="book-nav">
+    <button class="back-btn" onclick="closePage('about-page')">← Back</button>
+    <span class="nbh-brand">Stories of Steel</span>
+  </nav>
+  <div class="book-inner">
+    <h1 class="book-heading">About</h1>
+    <div class="about-body">
+      <p>Kane came to Pittsburgh and never quite left.</p>
+      <p>An obsessive of the region's industrial past, Kane has spent years tracing the stories that didn't make it into the history books — the workers who built the steel empire, the communities that formed around the mills, and the neighborhoods still living with that legacy today.</p>
+      <p>Stories of Steel grew out of a simple belief: that the best way to understand a place is to walk it. These tours are Kane's attempt to bring the history off the page and onto the streets where it actually happened — the riverbanks where Pinkertons landed, the avenues where steelworkers built their lives, the libraries Carnegie left behind as monuments to his own complicated conscience.</p>
+      <p>Pittsburgh's labor history is American history. Kane just wants to make sure people know where to look for it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ RESOURCES PAGE ═══════════════════════ -->
+<div id="resources-page">
+  <nav class="book-nav">
+    <button class="back-btn" onclick="closePage('resources-page')">← Back</button>
+    <span class="nbh-brand">Stories of Steel</span>
+  </nav>
+  <div class="book-inner">
+    <h1 class="book-heading">Resources</h1>
+    <p class="book-subhead">FURTHER READING, WATCHING &amp; EXPLORING</p>
+
+    <div class="resources-section">
+      <h3 class="resources-heading">Websites</h3>
+      <ul class="resources-list">
+        <li>
+          <a href="https://riversofsteel.com/" target="_blank" class="resource-link">
+            <span class="resource-title">Rivers of Steel</span>
+            <span class="resource-desc">Heritage organization preserving and celebrating the industrial legacy of southwestern Pennsylvania.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://riversofsteel.com/programs/preservation/archives/" target="_blank" class="resource-link">
+            <span class="resource-title">Rivers of Steel Archives</span>
+            <span class="resource-desc">Primary source photographs, documents, and oral histories from the steel era.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://battleofhomestead.org/" target="_blank" class="resource-link">
+            <span class="resource-title">Battle of Homestead Foundation</span>
+            <span class="resource-desc">Dedicated to preserving the memory of the 1892 Homestead Strike and its significance to American labor history.</span>
+          </a>
+        </li>
+        <li class="resource-placeholder">
+          <span class="resource-title">More coming soon</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="resources-section">
+      <h3 class="resources-heading">Videos</h3>
+      <ul class="resources-list">
+        <li>
+          <a href="https://www.youtube.com/channel/UCTeAYDRv6N9cfV_OChyytEQ" target="_blank" class="resource-link">
+            <span class="resource-title">Battle of Homestead Foundation — YouTube</span>
+            <span class="resource-desc">Documentary footage and visual histories of Pittsburgh's Mon Valley communities.</span>
+          </a>
+        </li>
+        <li class="resource-placeholder">
+          <span class="resource-title">More coming soon</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="resources-section">
+      <h3 class="resources-heading">Books</h3>
+      <ul class="resources-list">
+        <li class="resource-placeholder">
+          <span class="resource-title">Coming soon</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="resources-section">
+      <h3 class="resources-heading">Articles</h3>
+      <ul class="resources-list">
+        <li class="resource-placeholder">
+          <span class="resource-title">Coming soon</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ BOOKING PAGE ═══════════════════════ -->
+<div id="book-page">
+  <nav class="book-nav">
+    <button class="back-btn" onclick="closeCalendar()">← Back</button>
+    <span class="nbh-brand">Stories of Steel</span>
+  </nav>
+  <div class="book-inner">
+    <h1 class="book-heading">Book a Tour</h1>
+    <p class="book-subhead">SELECT A DATE TO RESERVE YOUR SPOT</p>
+
+    <iframe src="https://www.eventbrite.com/tickets-external?eid=1992024847944&ref=etckt"
+      frameborder="0" height="425" width="100%"
+      style="background: transparent; border: none;"
+      allowtransparency="true"></iframe>
+
+    <hr class="divider"/>
+    <div class="private-block">
+      <h3>Book a Private Experience</h3>
+      <p>Want a tour on your own schedule, for your group? We'll arrange something just for you.</p>
+      <a href="mailto:storiesofsteelpgh@gmail.com" class="btn-book" style="text-decoration:none;display:inline-block;">Inquire →</a>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════ ZOOM TRANSITION ═══════════════════════ -->
 <div id="zoom-bg"></div>
 <div id="zoom-overlay">
@@ -553,8 +796,13 @@
     </section>
 
     <div class="nbh-ctas">
-      <button class="btn-book" id="nbh-book">Reserve your spot</button>
-      <button class="btn-ghost">Read the full story</button>
+      <a class="btn-book" id="nbh-book" href="#" onclick="openCalendar(); return false;" style="text-decoration:none;display:inline-block;">Reserve a spot →</a>
+    </div>
+    <hr class="divider"/>
+    <div class="private-block">
+      <h3>Book a Private Experience</h3>
+      <p>Want a tour on your own schedule, for your group? We'll arrange something just for you.</p>
+      <a href="mailto:storiesofsteelpgh@gmail.com" class="btn-book" style="text-decoration:none;display:inline-block;">Inquire →</a>
     </div>
 
   </div>
@@ -663,7 +911,7 @@ function showPage(id) {
   document.getElementById('nbh-est').textContent  = n.est;
   document.getElementById('nbh-name').textContent = n.name;
   document.getElementById('nbh-desc').textContent = n.desc;
-  document.getElementById('nbh-book').textContent = 'Reserve a spot — ' + n.name;
+  document.getElementById('nbh-book').textContent = 'Reserve a spot — ' + n.name + ' →';
 
   document.getElementById('nbh-stats').innerHTML =
     mkStat('Duration', n.duration) + mkStat('Distance', n.distance) + mkStat('Group size', n.group);
@@ -733,6 +981,92 @@ document.querySelectorAll('.arch-wrap').forEach(function (el) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
   });
 });
+
+/* ── BOOKING / CALENDAR ── */
+
+// Placeholder events — swap url values for real Eventbrite links once created
+var EVENTS = [
+  { date: '2026-07-11', nbh: 'wilkinsburg', time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-11', nbh: 'homestead',   time: '1:00 PM',  spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-12', nbh: 'braddock',    time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-18', nbh: 'wilkinsburg', time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-18', nbh: 'homestead',   time: '1:00 PM',  spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-19', nbh: 'braddock',    time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-25', nbh: 'wilkinsburg', time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-25', nbh: 'homestead',   time: '1:00 PM',  spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+  { date: '2026-07-26', nbh: 'braddock',    time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
+];
+
+function openPage(id) {
+  var pg = document.getElementById(id);
+  pg.style.display = 'block';
+  pg.scrollTop = 0;
+}
+
+function closePage(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+function openCalendar() {
+  var pg = document.getElementById('book-page');
+  pg.style.display = 'block';
+  pg.scrollTop = 0;
+}
+
+function closeCalendar() {
+  document.getElementById('book-page').style.display = 'none';
+}
+
+function renderCalendar() {
+  var grid        = document.getElementById('cal-grid');
+  if (!grid) return;
+  grid.innerHTML  = '';
+  var firstDay    = new Date(calYear, calMonth, 1).getDay();
+  var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  var byDate = {};
+  EVENTS.forEach(function (e) {
+    if (!byDate[e.date]) byDate[e.date] = [];
+    byDate[e.date].push(e);
+  });
+
+  for (var i = 0; i < firstDay; i++) {
+    var blank = document.createElement('div');
+    blank.className = 'cal-day';
+    grid.appendChild(blank);
+  }
+
+  for (var d = 1; d <= daysInMonth; d++) {
+    var ds   = calYear + '-' + pad2(calMonth + 1) + '-' + pad2(d);
+    var cell = document.createElement('div');
+    var cls  = 'cal-day in-month';
+    if (byDate[ds])         cls += ' has-event';
+    if (calSelected === ds) cls += ' active';
+    cell.className   = cls;
+    cell.textContent = d;
+    if (byDate[ds]) {
+      (function (key) { cell.onclick = function () { selectDate(key); }; })(ds);
+    }
+    grid.appendChild(cell);
+  }
+}
+
+</script>
+
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js" type="text/javascript"></script>
+<script>
+(function initEB() {
+  if (window.EBWidgets) {
+    window.EBWidgets.createWidget({
+      widgetType: 'checkout',
+      eventId: '1992024847944',
+      iframeContainerId: 'eventbrite-widget-container-1992024847944',
+      iframeHeight: 425,
+    });
+  } else {
+    setTimeout(initEB, 100);
+  }
+})();
 </script>
 </body>
 </html>
