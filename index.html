@@ -120,23 +120,21 @@
       filter: brightness(1.2);
     }
 
-    .arch-enter {
-      position: absolute; bottom: 22px; left: 0; right: 0;
-      text-align: center; font-size: 10.5px; letter-spacing: 2.5px;
-      color: rgba(237,229,212,.9); z-index: 5;
-      opacity: 0; transform: translateY(4px);
-      transition: opacity .25s, transform .25s;
+    .arch-click-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; letter-spacing: 2px;
+      color: rgba(237,229,212,.45);
+      text-align: center;
     }
-    .arch-wrap:hover .arch-enter { opacity: 1; transform: translateY(0); }
 
-    /* ── BOTTOM NAV ── */
+    /* ── NAV ── */
     .home-footer {
-      display: flex; gap: 2rem; align-items: center;
-      opacity: .45; transition: opacity .3s;
+      display: flex; gap: 2.5rem; align-items: center; justify-content: center;
+      opacity: .5; transition: opacity .3s;
     }
-    .home-footer:hover { opacity: .7; }
+    .home-footer:hover { opacity: .85; }
     .home-footer a {
-      font-size: 11px; letter-spacing: 1.5px;
+      font-size: 13px; letter-spacing: 2px;
       color: #ede5d4; text-decoration: none;
     }
     .home-footer a:hover { color: #c8963c; }
@@ -425,6 +423,14 @@
 <!-- ═══════════════════════ HOMEPAGE ═══════════════════════ -->
 <div id="homepage" style="z-index:2; background:none;">
 
+  <!-- Top nav -->
+  <div class="home-footer">
+    <a href="#" onclick="openCalendar(); return false;">Book a Tour</a>
+    <a href="#" onclick="openPage('about-page'); return false;">About</a>
+    <a href="#" onclick="openPage('resources-page'); return false;">Resources</a>
+    <a href="mailto:storiesofsteelpgh@gmail.com">Contact</a>
+  </div>
+
   <!-- PERSPECTIVE SCENE -->
   <div class="scene-title">
     <span class="scene-title-stories">Stories</span>
@@ -451,7 +457,7 @@
       <svg class="arch-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
         <use href="#steel-frame"/>
       </svg>
-      <div class="arch-enter">Enter →</div>
+
     </div>
 
     <!-- Homestead -->
@@ -469,7 +475,7 @@
       <svg class="arch-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
         <use href="#steel-frame"/>
       </svg>
-      <div class="arch-enter">Enter →</div>
+
     </div>
 
     <!-- Braddock -->
@@ -487,18 +493,12 @@
       <svg class="arch-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
         <use href="#steel-frame"/>
       </svg>
-      <div class="arch-enter">Enter →</div>
+
     </div>
 
   </div>
 
-  <!-- Footer links -->
-  <div class="home-footer">
-    <a href="#" onclick="openCalendar(); return false;">Book a Tour</a>
-    <a href="#" onclick="openPage('about-page'); return false;">About</a>
-    <a href="#" onclick="openPage('resources-page'); return false;">Resources</a>
-    <a href="mailto:storiesofsteelpgh@gmail.com">Contact</a>
-  </div>
+
 
 </div>
 
@@ -508,9 +508,9 @@
     <!-- Brass keyline arch frame (double hairline, sides + top, within image edges) -->
     <g id="steel-frame">
       <path fill="none" stroke="#c8963c" stroke-width="1.6" stroke-opacity="0.85"
-        d="M 1,304 L 1,95 A 94,94 0 0 1 189,95 L 189,304"/>
+        d="M 1,304 L 1,95 A 94,94 0 0 1 189,95 L 189,304 L 1,304"/>
       <path fill="none" stroke="#c8963c" stroke-width="0.8" stroke-opacity="0.45"
-        d="M 8,304 L 8,95 A 87,87 0 0 1 182,95 L 182,304"/>
+        d="M 8,304 L 8,95 A 87,87 0 0 1 182,95 L 182,304 L 8,304"/>
     </g>
   </defs>
 </svg>
