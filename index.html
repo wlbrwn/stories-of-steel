@@ -11,8 +11,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      width: 100%; height: 100%;
-      overflow: hidden;
+      width: 100%; min-height: 100%;
       background: #0f0d08;
       color: #ede5d4;
       font-family: 'Inter', system-ui, sans-serif;
@@ -20,23 +19,54 @@
 
     /* ── HOMEPAGE ── */
     #homepage {
-      position: fixed; inset: 0;
+      position: relative;
+      min-height: 100vh; min-height: 100dvh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 1rem 2rem; gap: 1rem;
+      align-items: center; justify-content: flex-end;
+      padding: 4rem 2rem 6rem; gap: clamp(1.5rem, 5vh, 4rem);
     }
 
-    /* ── PERSPECTIVE SCENE ── */
-    .scene-svg { width: 100%; max-width: 920px; flex-shrink: 0; overflow: visible; }
-
-
-    /* ── SMOKE ANIMATION ── */
-    @keyframes wisp {
-      0%,100% { opacity: .45; transform: translateX(0) translateY(0) scaleX(1); }
-      50%      { opacity: .15; transform: translateX(1.5px) translateY(-6px) scaleX(.8); }
+    /* ── PHOTO BACKGROUND ── */
+    #scene-bg {
+      position: fixed; inset: 0; z-index: 0;
+      background: url('Images/hi res smokestacks.png') 64% 70% / 120% no-repeat;
+      filter: grayscale(1) brightness(0.5);
     }
-    .smoke1 { animation: wisp 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
-    .smoke2 { animation: wisp 3.6s ease-in-out infinite; animation-delay: -1.4s; transform-box: fill-box; transform-origin: center bottom; }
+    #scene-bg-overlay {
+      position: fixed; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse at center, rgba(15,13,8,0) 20%, rgba(15,13,8,0.6) 100%),
+        linear-gradient(to bottom, rgba(15,13,8,0.35) 0%, rgba(15,13,8,0) 40%, rgba(15,13,8,0.7) 100%);
+    }
+
+    /* ── TITLE ── */
+    .scene-title {
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      flex-shrink: 0;
+    }
+    .scene-title-stories {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 6.5rem); font-weight: 700;
+      color: #ede5d4; line-height: 1;
+    }
+    .scene-title-of {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+      font-style: italic; color: #c8963c; letter-spacing: 1.5px;
+      margin: 1.1em 0 0.45em;
+    }
+    .scene-title-steel {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 6.5rem); font-weight: 700;
+      color: #ede5d4; letter-spacing: 8px; line-height: 1;
+    }
+    .scene-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 1.4vw, 0.85rem);
+      color: rgba(237,229,212,.78); letter-spacing: 5px;
+      margin-top: 1.6em;
+    }
 
     /* ── ARCH PORTALS ── */
     .arches-row {
@@ -72,27 +102,26 @@
       background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.55) 100%);
     }
 
-    .arch-outline {
-      position: absolute; inset: 0; pointer-events: none;
-      transition: opacity .3s; opacity: .7;
-    }
-    .arch-wrap:hover .arch-outline { opacity: 1; }
-
     .arch-label-svg {
       position: absolute; top: 0; left: 0;
       width: 190px; height: 190px;
       pointer-events: none; z-index: 2;
     }
 
-    .arch-bricks {
+    .arch-frame {
       position: absolute; top: 0; left: 0;
       width: 190px; height: 304px;
       pointer-events: none; z-index: 4;
       overflow: visible;
+      opacity: 1;
+      transition: filter .4s ease;
+    }
+    .arch-wrap:hover .arch-frame {
+      filter: brightness(1.2);
     }
 
     .arch-enter {
-      position: absolute; bottom: 38px; left: 0; right: 0;
+      position: absolute; bottom: 22px; left: 0; right: 0;
       text-align: center; font-size: 10.5px; letter-spacing: 2.5px;
       color: rgba(237,229,212,.9); z-index: 5;
       opacity: 0; transform: translateY(4px);
@@ -129,11 +158,12 @@
       border-radius: 95px 95px 0 0;
       box-shadow: 0 0 0 3000px #0f0d08;
     }
-    #zoom-overlay-bricks {
+    #zoom-overlay-frame {
       position: absolute; top: 0; left: 0;
       width: 190px; height: 304px;
       overflow: visible; pointer-events: none;
       z-index: 1;
+      opacity: 1;
     }
 
     /* ── SCENE DARKEN (sits above zoom overlay, below page content) ── */
@@ -389,147 +419,19 @@
 </head>
 <body>
 
+<div id="scene-bg"></div>
+<div id="scene-bg-overlay"></div>
+
 <!-- ═══════════════════════ HOMEPAGE ═══════════════════════ -->
-<div id="homepage">
+<div id="homepage" style="z-index:2; background:none;">
 
   <!-- PERSPECTIVE SCENE -->
-  <svg class="scene-svg" viewBox="0 -220 900 515" xmlns="http://www.w3.org/2000/svg">
-
-    <!-- Perspective rails from bottom corners of title block, hidden behind stacks -->
-    <line x1="355" y1="156" x2="-30" y2="295" stroke="rgba(200,150,60,.22)" stroke-width=".75"/>
-    <line x1="545" y1="156" x2="930" y2="295" stroke="rgba(200,150,60,.22)" stroke-width=".75"/>
-
-    <!-- L1 cx=330 base_y=165 cap_y=35 h=126 w=8 ratio=15.75 -->
-    <g opacity=".40">
-      <rect x="326" y="39" width="8" height="126" fill="#1e1a12" stroke="rgba(200,150,60,.45)" stroke-width=".6"/>
-      <rect x="324" y="35" width="12" height="4" fill="#1e1a12" stroke="rgba(200,150,60,.45)" stroke-width=".6"/>
-      <path class="smoke1" d="M330,35 C329,27 331,19 330,11" stroke="#c8963c" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".5"/>
-    </g>
-
-    <!-- L2 cx=303 base_y=175 cap_y=15 h=154 w=10 ratio=15.4 -->
-    <g opacity=".52">
-      <rect x="298" y="21" width="10" height="154" fill="#1e1a12" stroke="rgba(200,150,60,.50)" stroke-width=".65"/>
-      <rect x="296" y="15" width="14" height="6" fill="#1e1a12" stroke="rgba(200,150,60,.50)" stroke-width=".65"/>
-      <line x1="302" y1="21" x2="302" y2="175" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <line x1="306" y1="21" x2="306" y2="175" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <path class="smoke1" d="M299,15 C297,5 300,-5 298,-15" stroke="#c8963c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".5"/>
-      <path class="smoke2" d="M307,15 C309,5 306,-5 308,-15" stroke="#c8963c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".35"/>
-    </g>
-
-    <!-- L3 cx=262 base_y=190 cap_y=-14 h=197 w=12 ratio=16.4 -->
-    <g opacity=".65">
-      <rect x="256" y="-7" width="12" height="197" fill="#1e1a12" stroke="rgba(200,150,60,.55)" stroke-width=".75"/>
-      <rect x="253" y="-14" width="18" height="7" fill="#1e1a12" stroke="rgba(200,150,60,.55)" stroke-width=".75"/>
-      <line x1="260" y1="-7" x2="260" y2="190" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <line x1="265" y1="-7" x2="265" y2="190" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <path class="smoke1" d="M257,-14 C255,-25 258,-36 256,-47" stroke="#c8963c" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".53"/>
-      <path class="smoke2" d="M267,-14 C269,-25 266,-36 268,-47" stroke="#c8963c" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".38"/>
-    </g>
-
-    <!-- L4 cx=206 base_y=210 cap_y=-55 h=257 w=16 ratio=16.1 -->
-    <g opacity=".78">
-      <rect x="198" y="-47" width="16" height="257" fill="#1e1a12" stroke="rgba(200,150,60,.60)" stroke-width=".85"/>
-      <rect x="195" y="-55" width="22" height="8" fill="#1e1a12" stroke="rgba(200,150,60,.60)" stroke-width=".85"/>
-      <line x1="202" y1="-47" x2="202" y2="210" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="206" y1="-47" x2="206" y2="210" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="210" y1="-47" x2="210" y2="210" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <path class="smoke1" d="M200,-55 C197,-68 201,-81 198,-94" stroke="#c8963c" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".55"/>
-      <path class="smoke2" d="M212,-55 C215,-68 211,-81 214,-94" stroke="#c8963c" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".40"/>
-    </g>
-
-    <!-- L5 cx=135 base_y=235 cap_y=-107 h=333 w=21 ratio=15.9 -->
-    <g opacity=".90">
-      <rect x="125" y="-98" width="21" height="333" fill="#1e1a12" stroke="rgba(200,150,60,.65)" stroke-width=".95"/>
-      <rect x="121" y="-107" width="29" height="9" fill="#1e1a12" stroke="rgba(200,150,60,.65)" stroke-width=".95"/>
-      <line x1="130" y1="-98" x2="130" y2="235" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="135" y1="-98" x2="135" y2="235" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="140" y1="-98" x2="140" y2="235" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <path class="smoke1" d="M127,-107 C124,-121 128,-135 125,-149" stroke="#c8963c" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".58"/>
-      <path class="smoke2" d="M143,-107 C146,-121 142,-135 145,-149" stroke="#c8963c" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".43"/>
-      <path class="smoke1" d="M135,-107 C132,-121 136,-135 132,-149" stroke="#c8963c" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".28"/>
-    </g>
-
-    <!-- L6 cx=49 base_y=267 cap_y=-169 h=426 w=27 ratio=15.8 -->
-    <g opacity="1">
-      <rect x="36" y="-159" width="27" height="426" fill="#1e1a12" stroke="rgba(200,150,60,.70)" stroke-width="1"/>
-      <rect x="31" y="-169" width="37" height="10" fill="#1e1a12" stroke="rgba(200,150,60,.70)" stroke-width="1"/>
-      <line x1="42" y1="-159" x2="42" y2="267" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="49" y1="-159" x2="49" y2="267" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="56" y1="-159" x2="56" y2="267" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <path class="smoke1" d="M40,-169 C37,-183 41,-197 38,-211" stroke="#c8963c" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".60"/>
-      <path class="smoke2" d="M58,-169 C61,-183 57,-197 60,-211" stroke="#c8963c" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".45"/>
-      <path class="smoke1" d="M49,-169 C46,-184 50,-199 46,-213" stroke="#c8963c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".30"/>
-    </g>
-
-    <!-- R1 cx=570 base_y=165 cap_y=35 h=126 w=8 -->
-    <g opacity=".40">
-      <rect x="566" y="39" width="8" height="126" fill="#1e1a12" stroke="rgba(200,150,60,.45)" stroke-width=".6"/>
-      <rect x="564" y="35" width="12" height="4" fill="#1e1a12" stroke="rgba(200,150,60,.45)" stroke-width=".6"/>
-      <path class="smoke2" d="M570,35 C571,27 569,19 570,11" stroke="#c8963c" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".5"/>
-    </g>
-
-    <!-- R2 cx=597 base_y=175 cap_y=15 h=154 w=10 -->
-    <g opacity=".52">
-      <rect x="592" y="21" width="10" height="154" fill="#1e1a12" stroke="rgba(200,150,60,.50)" stroke-width=".65"/>
-      <rect x="590" y="15" width="14" height="6" fill="#1e1a12" stroke="rgba(200,150,60,.50)" stroke-width=".65"/>
-      <line x1="595" y1="21" x2="595" y2="175" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <line x1="599" y1="21" x2="599" y2="175" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <path class="smoke2" d="M593,15 C591,5 594,-5 592,-15" stroke="#c8963c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".5"/>
-      <path class="smoke1" d="M601,15 C603,5 600,-5 602,-15" stroke="#c8963c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".35"/>
-    </g>
-
-    <!-- R3 cx=638 base_y=190 cap_y=-14 h=197 w=12 -->
-    <g opacity=".65">
-      <rect x="632" y="-7" width="12" height="197" fill="#1e1a12" stroke="rgba(200,150,60,.55)" stroke-width=".75"/>
-      <rect x="629" y="-14" width="18" height="7" fill="#1e1a12" stroke="rgba(200,150,60,.55)" stroke-width=".75"/>
-      <line x1="635" y1="-7" x2="635" y2="190" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <line x1="640" y1="-7" x2="640" y2="190" stroke="rgba(200,150,60,.1)" stroke-width=".5"/>
-      <path class="smoke2" d="M633,-14 C631,-25 634,-36 632,-47" stroke="#c8963c" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".53"/>
-      <path class="smoke1" d="M643,-14 C645,-25 642,-36 644,-47" stroke="#c8963c" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".38"/>
-    </g>
-
-    <!-- R4 cx=694 base_y=210 cap_y=-55 h=257 w=16 -->
-    <g opacity=".78">
-      <rect x="686" y="-47" width="16" height="257" fill="#1e1a12" stroke="rgba(200,150,60,.60)" stroke-width=".85"/>
-      <rect x="683" y="-55" width="22" height="8" fill="#1e1a12" stroke="rgba(200,150,60,.60)" stroke-width=".85"/>
-      <line x1="690" y1="-47" x2="690" y2="210" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="694" y1="-47" x2="694" y2="210" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="698" y1="-47" x2="698" y2="210" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <path class="smoke2" d="M688,-55 C685,-68 689,-81 686,-94" stroke="#c8963c" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".55"/>
-      <path class="smoke1" d="M700,-55 C703,-68 699,-81 702,-94" stroke="#c8963c" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".40"/>
-    </g>
-
-    <!-- R5 cx=765 base_y=235 cap_y=-107 h=333 w=21 -->
-    <g opacity=".90">
-      <rect x="755" y="-98" width="21" height="333" fill="#1e1a12" stroke="rgba(200,150,60,.65)" stroke-width=".95"/>
-      <rect x="751" y="-107" width="29" height="9" fill="#1e1a12" stroke="rgba(200,150,60,.65)" stroke-width=".95"/>
-      <line x1="760" y1="-98" x2="760" y2="235" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="765" y1="-98" x2="765" y2="235" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="770" y1="-98" x2="770" y2="235" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <path class="smoke2" d="M757,-107 C754,-121 758,-135 755,-149" stroke="#c8963c" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".58"/>
-      <path class="smoke1" d="M773,-107 C776,-121 772,-135 775,-149" stroke="#c8963c" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".43"/>
-      <path class="smoke2" d="M765,-107 C762,-121 766,-135 762,-149" stroke="#c8963c" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".28"/>
-    </g>
-
-    <!-- R6 cx=851 base_y=267 cap_y=-169 h=426 w=27 -->
-    <g opacity="1">
-      <rect x="838" y="-159" width="27" height="426" fill="#1e1a12" stroke="rgba(200,150,60,.70)" stroke-width="1"/>
-      <rect x="833" y="-169" width="37" height="10" fill="#1e1a12" stroke="rgba(200,150,60,.70)" stroke-width="1"/>
-      <line x1="844" y1="-159" x2="844" y2="267" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="851" y1="-159" x2="851" y2="267" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <line x1="858" y1="-159" x2="858" y2="267" stroke="rgba(200,150,60,.11)" stroke-width=".5"/>
-      <path class="smoke2" d="M842,-169 C839,-183 843,-197 840,-211" stroke="#c8963c" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".60"/>
-      <path class="smoke1" d="M860,-169 C863,-183 859,-197 862,-211" stroke="#c8963c" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".45"/>
-      <path class="smoke2" d="M851,-169 C848,-184 852,-199 848,-213" stroke="#c8963c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".30"/>
-    </g>
-
-    <!-- TITLE BLOCK -->
-    <text x="450" y="85" font-family="'Playfair Display',Georgia,serif" font-size="95" font-weight="700" fill="#ede5d4" text-anchor="middle">Stories</text>
-    <text x="450" y="122" font-family="'Playfair Display',Georgia,serif" font-size="18" font-style="italic" fill="#c8963c" text-anchor="middle" letter-spacing="1.5">of</text>
-    <text x="450" y="195" font-family="'Playfair Display',Georgia,serif" font-size="95" font-weight="700" fill="#ede5d4" text-anchor="middle" letter-spacing="10">Steel</text>
-    <text x="450" y="240" font-family="'Inter',sans-serif" font-size="18" fill="rgba(237,229,212,.38)" text-anchor="middle" letter-spacing="5">Tour Iconic Mon Valley Neighborhoods</text>
-
-  </svg>
+  <div class="scene-title">
+    <span class="scene-title-stories">Stories</span>
+    <span class="scene-title-of">of</span>
+    <span class="scene-title-steel">Steel</span>
+    <span class="scene-tagline">Tour Iconic Mon Valley Neighborhoods</span>
+  </div>
 
   <!-- ARCH PORTALS -->
   <div class="arches-row">
@@ -546,11 +448,8 @@
           <textPath href="#arc-w" startOffset="50%" text-anchor="middle">WILKINSBURG</textPath>
         </text>
       </svg>
-      <svg class="arch-outline" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-        <use href="#arch-outline-path"/>
-      </svg>
-      <svg class="arch-bricks" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-        <use href="#brick-arch"/>
+      <svg class="arch-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
+        <use href="#steel-frame"/>
       </svg>
       <div class="arch-enter">Enter →</div>
     </div>
@@ -567,11 +466,8 @@
           <textPath href="#arc-h" startOffset="50%" text-anchor="middle">HOMESTEAD</textPath>
         </text>
       </svg>
-      <svg class="arch-outline" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-        <use href="#arch-outline-path"/>
-      </svg>
-      <svg class="arch-bricks" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-        <use href="#brick-arch"/>
+      <svg class="arch-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
+        <use href="#steel-frame"/>
       </svg>
       <div class="arch-enter">Enter →</div>
     </div>
@@ -579,7 +475,7 @@
     <!-- Braddock -->
     <div class="arch-wrap" id="arch-braddock" onclick="enterArch('braddock')" role="button" tabindex="0" aria-label="Explore Braddock tour">
       <div class="arch-clip">
-        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/new-braddock.jpg'); background-position: 50% center;"></div>
+        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/new-braddock.jpg'); background-position: 60% center;"></div>
         <div class="arch-fade"></div>
       </div>
       <svg class="arch-label-svg" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
@@ -588,11 +484,8 @@
           <textPath href="#arc-b" startOffset="50%" text-anchor="middle">BRADDOCK</textPath>
         </text>
       </svg>
-      <svg class="arch-outline" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-        <use href="#arch-outline-path"/>
-      </svg>
-      <svg class="arch-bricks" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-        <use href="#brick-arch"/>
+      <svg class="arch-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
+        <use href="#steel-frame"/>
       </svg>
       <div class="arch-enter">Enter →</div>
     </div>
@@ -612,39 +505,13 @@
 <!-- Shared SVG definitions — referenced via <use> throughout the page -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <g id="brick-arch">
-      <g stroke="#150802" stroke-width="0.7" stroke-linejoin="round">
-        <path fill="#3d2010" d="M178,95 A83,83,0,0,0,173.9,69.4 L196.8,61.9 A107,107,0,0,1,202,95 Z"/>
-        <path fill="#4a2c18" d="M173.9,69.4 A83,83,0,0,0,162.1,46.2 L181.6,32.1 A107,107,0,0,1,196.8,61.9 Z"/>
-        <path fill="#3d2010" d="M162.1,46.2 A83,83,0,0,0,143.8,27.9 L157.9,8.4 A107,107,0,0,1,181.6,32.1 Z"/>
-        <path fill="#4a2c18" d="M143.8,27.9 A83,83,0,0,0,120.6,16 L128.1,-6.8 A107,107,0,0,1,157.9,8.4 Z"/>
-        <path fill="#5c3820" d="M120.6,16 A83,83,0,0,0,69.4,16 L61.9,-6.8 A107,107,0,0,1,128.1,-6.8 Z"/>
-        <path fill="#4a2c18" d="M69.4,16 A83,83,0,0,0,46.2,27.9 L32.1,8.4 A107,107,0,0,1,61.9,-6.8 Z"/>
-        <path fill="#3d2010" d="M46.2,27.9 A83,83,0,0,0,27.9,46.2 L8.4,32.1 A107,107,0,0,1,32.1,8.4 Z"/>
-        <path fill="#4a2c18" d="M27.9,46.2 A83,83,0,0,0,16.1,69.4 L-6.8,61.9 A107,107,0,0,1,8.4,32.1 Z"/>
-        <path fill="#3d2010" d="M16.1,69.4 A83,83,0,0,0,12,95 L-12,95 A107,107,0,0,1,-6.8,61.9 Z"/>
-        <rect fill="#3d2010" x="-12" y="95"  width="24" height="26"/><rect fill="#3d2010" x="178" y="95"  width="24" height="26"/>
-        <rect fill="#4a2c18" x="-12" y="121" width="24" height="26"/><rect fill="#4a2c18" x="178" y="121" width="24" height="26"/>
-        <rect fill="#3d2010" x="-12" y="147" width="24" height="26"/><rect fill="#3d2010" x="178" y="147" width="24" height="26"/>
-        <rect fill="#4a2c18" x="-12" y="173" width="24" height="26"/><rect fill="#4a2c18" x="178" y="173" width="24" height="26"/>
-        <rect fill="#3d2010" x="-12" y="199" width="24" height="26"/><rect fill="#3d2010" x="178" y="199" width="24" height="26"/>
-        <rect fill="#4a2c18" x="-12" y="225" width="24" height="26"/><rect fill="#4a2c18" x="178" y="225" width="24" height="26"/>
-        <rect fill="#3d2010" x="-12" y="251" width="24" height="26"/><rect fill="#3d2010" x="178" y="251" width="24" height="26"/>
-        <rect fill="#4a2c18" x="-12" y="277" width="24" height="26"/><rect fill="#4a2c18" x="178" y="277" width="24" height="26"/>
-        <rect fill="#3d2010" x="0"   y="278" width="38" height="13"/>
-        <rect fill="#4a2c18" x="38"  y="278" width="38" height="13"/>
-        <rect fill="#3d2010" x="76"  y="278" width="38" height="13"/>
-        <rect fill="#4a2c18" x="114" y="278" width="38" height="13"/>
-        <rect fill="#3d2010" x="152" y="278" width="38" height="13"/>
-        <rect fill="#4a2c18" x="-19" y="291" width="38" height="13"/>
-        <rect fill="#3d2010" x="19"  y="291" width="38" height="13"/>
-        <rect fill="#4a2c18" x="57"  y="291" width="38" height="13"/>
-        <rect fill="#3d2010" x="95"  y="291" width="38" height="13"/>
-        <rect fill="#4a2c18" x="133" y="291" width="38" height="13"/>
-        <rect fill="#3d2010" x="171" y="291" width="38" height="13"/>
-      </g>
+    <!-- Brass keyline arch frame (double hairline, sides + top, within image edges) -->
+    <g id="steel-frame">
+      <path fill="none" stroke="#c8963c" stroke-width="1.6" stroke-opacity="0.85"
+        d="M 1,304 L 1,95 A 94,94 0 0 1 189,95 L 189,304"/>
+      <path fill="none" stroke="#c8963c" stroke-width="0.8" stroke-opacity="0.45"
+        d="M 8,304 L 8,95 A 87,87 0 0 1 182,95 L 182,304"/>
     </g>
-    <path id="arch-outline-path" d="M 1,304 L 1,95 A 94,94 0 0 1 189,95 L 189,304" fill="none" stroke="rgba(200,150,60,.5)" stroke-width="1"/>
   </defs>
 </svg>
 
@@ -766,8 +633,8 @@
 <div id="zoom-bg"></div>
 <div id="zoom-overlay">
   <div id="zoom-overlay-hole"></div>
-  <svg id="zoom-overlay-bricks" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
-    <use href="#brick-arch"/>
+  <svg id="zoom-overlay-frame" viewBox="0 0 190 304" xmlns="http://www.w3.org/2000/svg">
+    <use href="#steel-frame"/>
   </svg>
 </div>
 
