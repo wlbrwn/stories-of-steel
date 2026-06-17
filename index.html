@@ -38,6 +38,11 @@
         radial-gradient(ellipse at center, rgba(15,13,8,0) 20%, rgba(15,13,8,0.6) 100%),
         linear-gradient(to bottom, rgba(15,13,8,0.35) 0%, rgba(15,13,8,0) 40%, rgba(15,13,8,0.7) 100%);
     }
+    #scene-vignette {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(ellipse 130% 95% at 50% 125%, rgba(15,13,8,0.82) 42%, transparent 70%);
+    }
 
     /* ── TITLE ── */
     .scene-title {
@@ -70,19 +75,19 @@
 
     /* ── ARCH PORTALS ── */
     .arches-row {
-      display: flex; gap: 36px;
+      display: flex; gap: 43px;
       align-items: flex-end; justify-content: center;
-      max-width: 840px; width: 100%;
+      max-width: 1008px; width: 100%;
     }
 
     .arch-wrap {
-      position: relative; width: 190px; height: 304px;
+      position: relative; width: 228px; height: 365px;
       flex-shrink: 0; cursor: pointer;
     }
 
     .arch-clip {
       position: absolute; inset: 0;
-      border-radius: 95px 95px 0 0;
+      border-radius: 114px 114px 0 0;
       overflow: hidden;
       filter: grayscale(1);
       transition: filter .6s ease;
@@ -90,7 +95,7 @@
     .arch-wrap:hover .arch-clip { filter: grayscale(0) brightness(1.12) saturate(1.1); }
 
     .arch-bg {
-      position: absolute; inset: -6px;
+      position: absolute; inset: -7px;
       background-size: cover; background-position: center;
       background-color: #2a1f0f;
       transition: transform .6s ease;
@@ -104,13 +109,13 @@
 
     .arch-label-svg {
       position: absolute; top: 0; left: 0;
-      width: 190px; height: 190px;
+      width: 228px; height: 228px;
       pointer-events: none; z-index: 2;
     }
 
     .arch-frame {
       position: absolute; top: 0; left: 0;
-      width: 190px; height: 304px;
+      width: 228px; height: 365px;
       pointer-events: none; z-index: 4;
       overflow: visible;
       opacity: 1;
@@ -153,12 +158,12 @@
     }
     #zoom-overlay-hole {
       position: absolute; inset: 0;
-      border-radius: 95px 95px 0 0;
+      border-radius: 114px 114px 0 0;
       box-shadow: 0 0 0 3000px #0f0d08;
     }
     #zoom-overlay-frame {
       position: absolute; top: 0; left: 0;
-      width: 190px; height: 304px;
+      width: 228px; height: 365px;
       overflow: visible; pointer-events: none;
       z-index: 1;
       opacity: 1;
@@ -419,6 +424,7 @@
 
 <div id="scene-bg"></div>
 <div id="scene-bg-overlay"></div>
+<div id="scene-vignette"></div>
 
 <!-- ═══════════════════════ HOMEPAGE ═══════════════════════ -->
 <div id="homepage" style="z-index:2; background:none;">
@@ -445,7 +451,7 @@
     <!-- Wilkinsburg -->
     <div class="arch-wrap" id="arch-wilkinsburg" onclick="enterArch('wilkinsburg')" role="button" tabindex="0" aria-label="Explore Wilkinsburg tour">
       <div class="arch-clip">
-        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/wood-st-wilkinsurg-postcard-1.jpg')"></div>
+        <div class="arch-bg" style="background-image:url('Images/Wilkinsburg no text.png'); background-position: center 95%;"></div>
         <div class="arch-fade"></div>
       </div>
       <svg class="arch-label-svg" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
@@ -463,7 +469,7 @@
     <!-- Homestead -->
     <div class="arch-wrap" id="arch-homestead" onclick="enterArch('homestead')" role="button" tabindex="0" aria-label="Explore Homestead tour">
       <div class="arch-clip">
-        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/homestead-postcard-ros-1.jpg')"></div>
+        <div class="arch-bg" style="background-image:url('Images/Homestead no text.png')"></div>
         <div class="arch-fade"></div>
       </div>
       <svg class="arch-label-svg" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
@@ -481,7 +487,7 @@
     <!-- Braddock -->
     <div class="arch-wrap" id="arch-braddock" onclick="enterArch('braddock')" role="button" tabindex="0" aria-label="Explore Braddock tour">
       <div class="arch-clip">
-        <div class="arch-bg" style="background-image:url('https://storiesofsteel.com/wp-content/uploads/2026/03/new-braddock.jpg'); background-position: 60% center;"></div>
+        <div class="arch-bg" style="background-image:url('Images/Braddock no text.png'); background-position: 60% center;"></div>
         <div class="arch-fade"></div>
       </div>
       <svg class="arch-label-svg" viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
@@ -507,9 +513,9 @@
   <defs>
     <!-- Brass keyline arch frame (double hairline, sides + top, within image edges) -->
     <g id="steel-frame">
-      <path fill="none" stroke="#c8963c" stroke-width="1.6" stroke-opacity="0.85"
+      <path fill="none" stroke="#c8963c" stroke-width="2.4" stroke-opacity="0.85"
         d="M 1,304 L 1,95 A 94,94 0 0 1 189,95 L 189,304 L 1,304"/>
-      <path fill="none" stroke="#c8963c" stroke-width="0.8" stroke-opacity="0.45"
+      <path fill="none" stroke="#c8963c" stroke-width="1.2" stroke-opacity="0.45"
         d="M 8,304 L 8,95 A 87,87 0 0 1 182,95 L 182,304 L 8,304"/>
     </g>
   </defs>
@@ -681,7 +687,9 @@ var N = {
     est: 'Est. 1887',
     name: 'Wilkinsburg',
     desc: 'A gateway borough of Victorian grandeur and Great Migration energy, now a community writing the next chapter of its story.',
-    image: 'https://storiesofsteel.com/wp-content/uploads/2026/03/wood-st-wilkinsurg-postcard-1.jpg',
+    image: 'Images/Wilkinsburg no text.png',
+    bgPosition: 'center bottom',
+    spotlights: [[0.28, 0.32], [0.68, 0.38], [0.5, 0.68]],
     duration: '75 min',
     distance: '1.0 mile',
     group: 'Up to 15',
@@ -696,7 +704,9 @@ var N = {
     est: 'Est. 1880',
     name: 'Homestead',
     desc: 'The Strike of 1892 changed American labor history. Walk the riverbanks where steelworkers stood their ground against Carnegie and Frick.',
-    image: 'https://storiesofsteel.com/wp-content/uploads/2026/03/homestead-postcard-ros-1.jpg',
+    image: 'Images/Homestead no text.png',
+    bgPosition: 'center bottom',
+    spotlights: [[0.25, 0.3], [0.52, 0.45], [0.5, 0.72]],
     duration: '90 min',
     distance: '1.5 miles',
     group: 'Up to 15',
@@ -711,7 +721,9 @@ var N = {
     est: 'Est. 1867',
     name: 'Braddock',
     desc: "Home to Carnegie Steel's Edgar Thomson Works — still operating today — and the first Carnegie library in America. Fire, iron, and endurance.",
-    image: 'https://storiesofsteel.com/wp-content/uploads/2026/03/new-braddock.jpg',
+    image: 'Images/Braddock no text.png',
+    bgPosition: 'center bottom',
+    spotlights: [[0.38, 0.28], [0.62, 0.55], [0.42, 0.72]],
     duration: '90 min',
     distance: '1.2 miles',
     group: 'Up to 15',
@@ -726,6 +738,9 @@ var N = {
 
 var active = null;
 
+var activeClip = null;
+var activeBg   = null;
+
 function enterArch(id) {
   if (active) return;
   active = id;
@@ -733,43 +748,107 @@ function enterArch(id) {
   var n  = N[id];
   var el = document.getElementById('arch-' + id);
   var r  = el.getBoundingClientRect();
+
+  // Freeze the arch's hover state: lock filter and scale so nothing snaps on click.
+  activeClip = el.querySelector('.arch-clip');
+  activeClip.style.transition = 'none';
+  activeClip.style.filter = 'grayscale(0) brightness(1.12) saturate(1.1)';
+  activeBg = el.querySelector('.arch-bg');
+  activeBg.style.transition = 'none';
+  activeBg.style.transform = 'scale(1)';
   var vw = window.innerWidth;
   var vh = window.innerHeight;
-  var dur = '2.5s linear';
+  var dur = '1.8s linear';
+
+  // Scale needed to cover the full viewport when expanding from the arch's position.
+  var archCx = r.left + r.width  / 2;
+  var archCy = r.top  + r.height / 2;
+  var scaleX = 2 * Math.max(archCx, vw - archCx) / r.width;
+  var scaleY = 2 * Math.max(archCy, vh - archCy) / r.height;
+  var scale  = Math.max(scaleX, scaleY) * 1.15;
 
   var bg = document.getElementById('zoom-bg');
-  bg.style.backgroundImage = 'url(' + n.image + ')';
-  bg.style.display = 'block';
-
-  // Translation needed to move the arch center to the viewport center.
-  var tx = vw / 2 - (r.left + r.width  / 2);
-  var ty = vh / 2 - (r.top  + r.height / 2);
-
-  // Once centered, scale to cover the full viewport.
-  var scale = Math.max(vw / r.width, vh / r.height) * 3;
-
   var ov = document.getElementById('zoom-overlay');
+
+  // Phase 0a: fade in zoom-overlay (black outside arch, arch hole shows homepage).
   ov.style.left   = r.left   + 'px';
   ov.style.top    = r.top    + 'px';
   ov.style.width  = r.width  + 'px';
   ov.style.height = r.height + 'px';
   ov.style.transformOrigin = 'center';
+  ov.style.opacity    = '0';
   ov.style.transition = 'none';
   ov.style.transform  = 'translate(0, 0)';
   ov.style.display    = 'block';
 
+  // zoom-bg starts exactly at arch-bg position/size/style — pixel-identical to thumbnail.
+  var bgInset = 7;
+  var archFade  = 'linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.55) 100%)';
+  var archBgPos = window.getComputedStyle(activeBg).backgroundPosition;
+  bg.style.backgroundImage    = archFade + ', url("' + n.image + '")';
+  bg.style.backgroundPosition = archBgPos;
+  bg.style.filter             = 'brightness(1.12) saturate(1.1)';
+  bg.style.position     = 'fixed';
+  bg.style.left         = (r.left   - bgInset) + 'px';
+  bg.style.top          = (r.top    - bgInset) + 'px';
+  bg.style.right        = 'auto';
+  bg.style.bottom       = 'auto';
+  bg.style.width        = (r.width  + bgInset * 2) + 'px';
+  bg.style.height       = (r.height + bgInset * 2) + 'px';
+  bg.style.clipPath     = 'inset(' + bgInset + 'px round 114px 114px 0 0)';
+  bg.style.borderRadius = '0';
+  bg.style.opacity      = '0';
+  bg.style.transition   = 'none';
+  bg.style.display      = 'block';
+
   void ov.offsetWidth;
+  ov.style.transition = 'opacity 0.7s ease';
+  ov.style.opacity    = '1';
 
-  // Phase 1: slide to center of screen.
-  ov.style.transition = 'transform 1.2s ease-in-out';
-  ov.style.transform  = 'translate(' + tx + 'px, ' + ty + 'px)';
-
-  // Phase 2: scale up from center.
   setTimeout(function () {
-    ov.style.transition = 'transform ' + dur;
-    ov.style.transform  = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
-    setTimeout(function () { showPage(id); }, 1200);
-  }, 1200);
+    // Phase 0b: show zoom-bg (matches thumbnail), then expand to full-screen via rAF
+    // so all four edges share one easing curve — no direction fighting.
+    bg.style.opacity         = '1';
+    bg.style.clipPath        = 'none';
+    bg.style.filter          = 'none';
+    bg.style.backgroundImage = 'url("' + n.image + '")';
+    bg.style.backgroundSize  = 'cover';
+    // backgroundPosition stays at archBgPos (set in Phase 0a) — transition it to the
+    // final value so the image scrolls smoothly in sync with the expansion.
+    void bg.offsetWidth;
+    bg.style.transition         = 'background-position 1.4s ease-out';
+    bg.style.backgroundPosition = n.bgPosition || 'center';
+
+    var startL = r.left   - bgInset;
+    var startT = r.top    - bgInset;
+    var startW = r.width  + bgInset * 2;
+    var startH = r.height + bgInset * 2;
+    var DUR    = 1400;
+    var t0     = null;
+
+    function ease(p) { return 1 - Math.pow(1 - p, 3); }
+
+    function tick(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / DUR, 1);
+      var e = ease(p);
+      bg.style.left   = (startL + (0  - startL) * e) + 'px';
+      bg.style.top    = (startT + (0  - startT) * e) + 'px';
+      bg.style.width  = (startW + (vw - startW) * e) + 'px';
+      bg.style.height = (startH + (vh - startH) * e) + 'px';
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        bg.style.left = '0'; bg.style.top = '0';
+        bg.style.width = '100vw'; bg.style.height = '100vh';
+        bg.style.transition = 'none';
+        ov.style.transition = 'transform ' + dur;
+        ov.style.transform  = 'scale(' + scale + ')';
+        setTimeout(function () { showPage(id); }, 1800);
+      }
+    }
+    requestAnimationFrame(tick);
+  }, 750);
 }
 
 function showPage(id) {
@@ -788,6 +867,9 @@ function showPage(id) {
   }).join('');
 
   document.getElementById('zoom-overlay').style.display = 'none';
+
+  var bg = document.getElementById('zoom-bg');
+  if (n.bgPosition) bg.style.backgroundPosition = n.bgPosition;
 
   var dk = document.getElementById('scene-darken');
   dk.style.transition = 'none';
@@ -831,13 +913,37 @@ function goBack() {
 
     setTimeout(function () {
       dk.style.display      = 'none';
-      bg.style.display      = 'none';
-      bg.style.opacity      = '';
-      bg.style.backgroundImage = '';
-      bg.style.transition   = '';
+      bg.style.display         = 'none';
+      bg.style.opacity         = '';
+      bg.style.position        = '';
+      bg.style.left            = '';
+      bg.style.top             = '';
+      bg.style.right           = '';
+      bg.style.bottom          = '';
+      bg.style.width           = '';
+      bg.style.height          = '';
+      bg.style.borderRadius       = '';
+      bg.style.clipPath           = '';
+      bg.style.filter             = '';
+      bg.style.transform          = '';
+      bg.style.transformOrigin    = '';
+      bg.style.backgroundImage    = '';
+      bg.style.backgroundSize     = '';
+      bg.style.backgroundPosition = '';
+      bg.style.transition         = '';
       ov.style.display      = 'none';
       ov.style.transform    = '';
       ov.style.transition   = '';
+      if (activeClip) {
+        activeClip.style.filter = '';
+        activeClip.style.transition = '';
+        activeClip = null;
+      }
+      if (activeBg) {
+        activeBg.style.transform = '';
+        activeBg.style.transition = '';
+        activeBg = null;
+      }
       active = null;
     }, 450);
   }, 300);
