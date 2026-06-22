@@ -75,19 +75,19 @@
 
     /* ── ARCH PORTALS ── */
     .arches-row {
-      display: flex; gap: 43px;
+      display: flex; gap: 50px;
       align-items: flex-end; justify-content: center;
-      max-width: 1008px; width: 100%;
+      max-width: 1160px; width: 100%;
     }
 
     .arch-wrap {
-      position: relative; width: 228px; height: 365px;
+      position: relative; width: 262px; height: 420px;
       flex-shrink: 0; cursor: pointer;
     }
 
     .arch-clip {
       position: absolute; inset: 0;
-      border-radius: 114px 114px 0 0;
+      border-radius: 131px 131px 0 0;
       overflow: hidden;
       filter: grayscale(1);
       transition: filter .6s ease;
@@ -109,13 +109,13 @@
 
     .arch-label-svg {
       position: absolute; top: 0; left: 0;
-      width: 228px; height: 228px;
+      width: 262px; height: 262px;
       pointer-events: none; z-index: 2;
     }
 
     .arch-frame {
       position: absolute; top: 0; left: 0;
-      width: 228px; height: 365px;
+      width: 262px; height: 420px;
       pointer-events: none; z-index: 4;
       overflow: visible;
       opacity: 1;
@@ -158,12 +158,12 @@
     }
     #zoom-overlay-hole {
       position: absolute; inset: 0;
-      border-radius: 114px 114px 0 0;
+      border-radius: 131px 131px 0 0;
       box-shadow: 0 0 0 3000px #0f0d08;
     }
     #zoom-overlay-frame {
       position: absolute; top: 0; left: 0;
-      width: 228px; height: 365px;
+      width: 262px; height: 420px;
       overflow: visible; pointer-events: none;
       z-index: 1;
       opacity: 1;
@@ -795,7 +795,7 @@ function enterArch(id) {
   bg.style.bottom       = 'auto';
   bg.style.width        = (r.width  + bgInset * 2) + 'px';
   bg.style.height       = (r.height + bgInset * 2) + 'px';
-  bg.style.clipPath     = 'inset(' + bgInset + 'px round 114px 114px 0 0)';
+  bg.style.clipPath     = 'inset(' + bgInset + 'px round 131px 131px 0 0)';
   bg.style.borderRadius = '0';
   bg.style.opacity      = '0';
   bg.style.transition   = 'none';
