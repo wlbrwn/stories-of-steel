@@ -272,6 +272,29 @@
       line-height: 1.5; padding-top: 5px;
     }
 
+    .nbh-local-section { padding: 0 2.5rem 2.5rem; max-width: 720px; margin: 0 auto; }
+    .local-section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700; color: #ede5d4;
+      margin: 0 0 2rem; letter-spacing: -0.5px;
+      text-align: center;
+    }
+    .local-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 600px) { .local-grid { grid-template-columns: 1fr; gap: 1.2rem; } }
+    .local-group {}
+    .local-heading {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: #c8963c; margin-bottom: 0.7rem;
+    }
+    .local-list { list-style: none; margin: 0; padding: 0; }
+    .local-list li {
+      font-size: 13px; color: rgba(237,229,212,.68);
+      line-height: 1.6; padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(200,150,60,.1);
+    }
+    .local-list li:last-child { border-bottom: none; }
+
     .nbh-ctas { padding: 0 2.5rem 4rem; display: flex; gap: 1rem; flex-wrap: wrap; max-width: 720px; margin: 0 auto; justify-content: center; }
 
     .btn-book {
@@ -324,44 +347,6 @@
       transition: color .2s;
     }
     .cal-nav-btn:hover { color: #c8963c; }
-    .cal-weekdays {
-      display: grid; grid-template-columns: repeat(7,1fr);
-      margin-bottom: 4px;
-    }
-    .cal-weekdays span {
-      text-align: center; font-size: 9px; letter-spacing: 1.5px;
-      color: rgba(237,229,212,.22); padding: 4px 0;
-    }
-    .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
-    .cal-day {
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: rgba(237,229,212,.18); border-radius: 2px;
-    }
-    .cal-day.in-month { color: rgba(237,229,212,.38); }
-    .cal-day.has-event {
-      color: #c8963c; cursor: pointer; font-weight: 500;
-      background: rgba(200,150,60,.1);
-      border: 1px solid rgba(200,150,60,.28);
-      transition: background .15s;
-    }
-    .cal-day.has-event:hover { background: rgba(200,150,60,.2); }
-    .cal-day.has-event.active { background: rgba(200,150,60,.28); border-color: #c8963c; }
-    .cal-detail { margin-top: 2rem; }
-    .cal-detail-heading {
-      font-size: 10px; letter-spacing: 3px;
-      color: rgba(237,229,212,.28); margin-bottom: 0.85rem;
-      padding-top: 1.5rem; border-top: 1px solid rgba(200,150,60,.15);
-    }
-    .event-card {
-      display: flex; align-items: center; justify-content: space-between;
-      background: #1e1a12; padding: 1rem 1.25rem; margin-bottom: 6px;
-    }
-    .event-card-name {
-      font-family: 'Playfair Display', serif; font-size: 1rem; color: #ede5d4;
-      margin-bottom: 3px;
-    }
-    .event-card-meta { font-size: 11px; letter-spacing: 1px; color: #c8963c; }
-    .event-card-spots { font-size: 11px; color: rgba(237,229,212,.28); margin-top: 2px; }
     .divider { border: none; border-top: 1px solid rgba(200,150,60,.12); margin: 3rem 0; }
     .private-block { text-align: center; }
     .private-block h3 {
@@ -530,10 +515,10 @@
   <div class="book-inner">
     <h1 class="book-heading">About</h1>
     <div class="about-body">
-      <p>Kane came to Pittsburgh and never quite left.</p>
-      <p>An obsessive of the region's industrial past, Kane has spent years tracing the stories that didn't make it into the history books — the workers who built the steel empire, the communities that formed around the mills, and the neighborhoods still living with that legacy today.</p>
-      <p>Stories of Steel grew out of a simple belief: that the best way to understand a place is to walk it. These tours are Kane's attempt to bring the history off the page and onto the streets where it actually happened — the riverbanks where Pinkertons landed, the avenues where steelworkers built their lives, the libraries Carnegie left behind as monuments to his own complicated conscience.</p>
-      <p>Pittsburgh's labor history is American history. Kane just wants to make sure people know where to look for it.</p>
+      <p>Born in Gettysburg, raised in the Philly suburbs, and a current resident of Swissvale, I've tasted many of the flavors Pennsylvania has to offer &amp; the Mon Valley is my absolute favorite.</p>
+      <p>After moving here in 2011, I developed an undeniable connection with the region. When people think about Pittsburgh they think about steel &amp; the Mon Valley mill towns are where that steel was made. People from around the world came here to do the most dangerous work imaginable for the promise of an American life. It's one of the most fascinating and important stories in American history — and most people don't know it.</p>
+      <p>I believe the best way to understand a place is to walk it. These tours are my attempt to bring the history off the page and onto the streets where it actually happened — the riverbanks where Pinkertons landed, the avenues where steelworkers built their lives, the libraries Carnegie left behind as monuments to his own complicated conscience.</p>
+      <p>Pittsburgh's labor history is American history. I just want to make sure people know where to look for it.</p>
     </div>
   </div>
 </div>
@@ -618,17 +603,11 @@
     <span class="nbh-brand">Stories of Steel</span>
   </nav>
   <div class="book-inner">
-    <h1 class="book-heading">Book a Tour</h1>
-    <p class="book-subhead">SELECT A DATE TO RESERVE YOUR SPOT</p>
+    <h1 class="book-heading" id="book-heading">Book a Tour</h1>
+    <p class="book-subhead">RESERVE YOUR SPOT</p>
 
-    <div style="border: 1px solid rgba(200,150,60,.25); padding: 2.5rem; margin: 1.5rem 0; text-align: center;">
-      <p style="font-family:'Inter',sans-serif; font-size:0.85rem; letter-spacing:0.12em; color:rgba(237,229,212,.5); margin:0 0 0.6rem; text-transform:uppercase;">Public Tours · Ticketed via Eventbrite</p>
-      <p style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#ede5d4; margin:0 0 1.8rem; font-weight:400;">Browse upcoming dates &amp; reserve your spot</p>
-      <a href="https://www.eventbrite.com/e/test-tickets-1992024847944?aff=oddtdtcreator"
-         target="_blank" rel="noopener"
-         class="btn-book" style="text-decoration:none; display:inline-block; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; padding:15px 40px;">
-        View Dates &amp; Book →
-      </a>
+    <div class="form-wrap">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf3Zmvh-Em-aMIpiMa_6mt_t6ZvHAHxkgjvgAG4ul14OW8ZOw/viewform?embedded=true" width="100%" height="1112" frameborder="0" marginheight="0" marginwidth="0" style="max-width:640px; display:block; margin:0 auto; background:transparent;">Loading…</iframe>
     </div>
 
     <hr class="divider"/>
@@ -668,10 +647,7 @@
       <div class="nbh-stats" id="nbh-stats"></div>
     </section>
 
-    <section class="nbh-stops-section">
-      <p class="stops-heading">Tour highlights</p>
-      <div class="stops-grid" id="nbh-stops"></div>
-    </section>
+    <section class="nbh-local-section" id="nbh-local"></section>
 
     <div class="nbh-ctas">
       <a class="btn-book" id="nbh-book" href="#" onclick="openCalendar(); return false;" style="text-decoration:none;display:inline-block;">Reserve a spot →</a>
@@ -691,53 +667,68 @@ var N = {
   wilkinsburg: {
     est: 'Est. 1887',
     name: 'Wilkinsburg',
-    desc: 'A gateway borough of Victorian grandeur and Great Migration energy, now a community writing the next chapter of its story.',
+    desc: "Wilkinsburg was one of Pittsburgh's first middle class suburbs. Mid to upper level management from Westinghouse, Carnegie Steel and others lived here & could reach downtown Pittsburgh on a short 20-minute ride on the rail via East Liberty. While there was no mill within the borough limits, it suffered as much as any mill town through the industrial collapse of the rust belt. Changing demographics and apathy amongst the locals made for a mismanagement of borough funds. By the 1980s, Wilkinsburg was one of the most depressed towns in the entire state of Pennsylvania. Many of the economic troubles of the borough today can be traced back to that time. But through it all there's been a core of people who have never given up. Come see Wilkinsburg in a way you've never considered before!",
     image: 'Images/Wilkinsburg no text.png',
     bgPosition: 'center bottom',
     spotlights: [[0.28, 0.32], [0.68, 0.38], [0.5, 0.68]],
-    duration: '75 min',
-    distance: '1.0 mile',
+    duration: '2 hours',
+    distance: '1.5 miles',
     group: 'Up to 15',
+    startPoint: 'Wilkinsburg Borough Building',
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSczrcMds_cKZe_BL2wmcrVLHz_DTRXrx83ufa2mnEF17eZn7A/viewform?embedded=true',
     stops: [
       { n:'01', t:'Historic Penn Avenue commercial corridor' },
       { n:'02', t:'Hamnett Place National Historic District' },
-      { n:'03', t:'Electric street railway heritage sites' },
-      { n:'04', t:'Great Migration stories and community identity' }
-    ]
+      { n:'03', t:'West Penn Hospital and the management-class landscape' },
+      { n:'04', t:'Great Migration stories and community revival' }
+    ],
+    food: ['Nancy\'s Revival', 'BB&Bur Pastry Kitchen and Bakery', 'Madeleine Bakery and Bistro', 'Unique Cuisine Catering'],
+    shop: ['WorkshopPGH Store & The Teenie Weenie Kitchen Shop', 'Fungus Books', 'Lovett Sundries'],
+    culture: ['International Museum of the Bamileke Genocide', 'Eastern Standard Photo']
   },
   homestead: {
     est: 'Est. 1880',
     name: 'Homestead',
-    desc: 'The Strike of 1892 changed American labor history. Walk the riverbanks where steelworkers stood their ground against Carnegie and Frick.',
+    desc: "Homestead's history is emblematic of the industrial boom & bust of the rust belt as a whole. The former Homestead Steel Mill sat on what is now referred to as the Waterfront. For a time, it was the most advanced mill of its kind in the world. There are important lessons we can derive from the borough. About how great fortunes were made from industrial development, how factory workers built up their own position on the shop floor, and how the community of today is rebuilding after the decline of \"Big Steel.\"",
     image: 'Images/Homestead no text.png',
     bgPosition: 'center bottom',
     spotlights: [[0.25, 0.3], [0.52, 0.45], [0.5, 0.72]],
-    duration: '90 min',
-    distance: '1.5 miles',
+    duration: '2 hours',
+    distance: '2 miles',
     group: 'Up to 15',
+    startPoint: 'Homestead Pennsylvania Railroad Station',
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSchlnXMf_UwK7e1o95nEjELgxeSXObHzHKxqeA9dCUUfEjEQg/viewform?embedded=true',
     stops: [
       { n:'01', t:'Pinkerton landing site on the Monongahela' },
       { n:'02', t:'The Bost Building — strike headquarters, 1892' },
-      { n:'03', t:'Waterfront, site of the Homestead Steel Works' },
-      { n:'04', t:'Carnegie library and bathhouse complex' }
-    ]
+      { n:'03', t:'The Waterfront, site of the Homestead Steel Works' },
+      { n:'04', t:'Carnegie Library and Music Hall of Homestead' }
+    ],
+    food: ['Los Gallitos', 'Arabica Robusta Coffee House', 'Secretos De Mis Abuelos', "Nancy B's Bakery", 'Golden Age Beer Co.'],
+    shop: ['Retro on 8th'],
+    culture: ['The Bost Building', 'Glitterbox Theater', 'Bulgarian Macedonian National Educational and Cultural Center', 'Carnegie of Homestead']
   },
   braddock: {
     est: 'Est. 1867',
     name: 'Braddock',
-    desc: "Home to Carnegie Steel's Edgar Thomson Works — still operating today — and the first Carnegie library in America. Fire, iron, and endurance.",
+    desc: "Braddock started as a milltown in the 1870s with the construction of the Edgar Thompson works. The economic impact and environmental shadow cast by the mill has defined the neighborhood ever since. Much is said about the fabled Mon Valley mill town – how times were good with the mill around & much worse once they closed. Braddock has held onto its mill & yet today the borough is one of the poorest in Pennsylvania. Learn about the saga of Braddock and how the borough is forging a path into the future on this special tour!",
     image: 'Images/Braddock no text.png',
     bgPosition: 'center bottom',
     spotlights: [[0.38, 0.28], [0.62, 0.55], [0.42, 0.72]],
-    duration: '90 min',
-    distance: '1.2 miles',
+    duration: '2 hours',
+    distance: '2.5 miles',
     group: 'Up to 15',
+    startPoint: 'Carnegie One Library',
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSf3Zmvh-Em-aMIpiMa_6mt_t6ZvHAHxkgjvgAG4ul14OW8ZOw/viewform?embedded=true',
     stops: [
       { n:'01', t:'Edgar Thomson Works — Carnegie Steel, still in operation' },
-      { n:'02', t:"America's first Carnegie public library (1889)" },
-      { n:'03', t:"Braddock's Field — Battle of 1755 site" },
-      { n:'04', t:'PUMP project and 21st-century community revival' }
-    ]
+      { n:'02', t:"Carnegie One Library — America's first free public library" },
+      { n:'03', t:"Braddock's Field — site of General Braddock's defeat, 1755" },
+      { n:'04', t:'Carrie Blast Furnaces and the riverfront industrial landscape' }
+    ],
+    food: ['Brassero Grill', "Aunt Cheryl's", 'Braddock Public House'],
+    shop: ['Golden Treasures'],
+    culture: ['Carnegie One Library', "Braddock's Battlefield History Center", 'Pearl Arts Movement & Sound', 'Carrie Blast Furnaces']
   }
 };
 
@@ -865,11 +856,26 @@ function showPage(id) {
   document.getElementById('nbh-book').textContent = 'Reserve a spot — ' + n.name + ' →';
 
   document.getElementById('nbh-stats').innerHTML =
-    mkStat('Duration', n.duration) + mkStat('Distance', n.distance) + mkStat('Group size', n.group);
+    mkStat('Start point', n.startPoint || '—') +
+    mkStat('Duration', n.duration) +
+    mkStat('Distance', n.distance);
 
-  document.getElementById('nbh-stops').innerHTML = n.stops.map(function (s) {
-    return '<div class="stop-cell"><span class="stop-num">' + s.n + '</span><span class="stop-text">' + s.t + '</span></div>';
-  }).join('');
+  function mkLocalGroup(heading, items) {
+    if (!items || !items.length) return '';
+    return '<div class="local-group">' +
+      '<p class="local-heading">' + heading + '</p>' +
+      '<ul class="local-list">' +
+      items.map(function(i){ return '<li>' + i + '</li>'; }).join('') +
+      '</ul></div>';
+  }
+  var localHtml = mkLocalGroup('Eat', n.food) + mkLocalGroup('Shop', n.shop) + mkLocalGroup('See', n.culture);
+  var localEl = document.getElementById('nbh-local');
+  if (localHtml) {
+    localEl.innerHTML = '<h2 class="local-section-heading">Local Favorites</h2><div class="local-grid">' + localHtml + '</div>';
+    localEl.style.display = 'block';
+  } else {
+    localEl.style.display = 'none';
+  }
 
   document.getElementById('zoom-overlay').style.display = 'none';
 
@@ -962,18 +968,6 @@ document.querySelectorAll('.arch-wrap').forEach(function (el) {
 
 /* ── BOOKING / CALENDAR ── */
 
-// Placeholder events — swap url values for real Eventbrite links once created
-var EVENTS = [
-  { date: '2026-07-11', nbh: 'wilkinsburg', time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-11', nbh: 'homestead',   time: '1:00 PM',  spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-12', nbh: 'braddock',    time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-18', nbh: 'wilkinsburg', time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-18', nbh: 'homestead',   time: '1:00 PM',  spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-19', nbh: 'braddock',    time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-25', nbh: 'wilkinsburg', time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-25', nbh: 'homestead',   time: '1:00 PM',  spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-  { date: '2026-07-26', nbh: 'braddock',    time: '10:00 AM', spots: 15, url: 'https://www.eventbrite.com/e/stories-of-steel-braddock-tickets-1992024847944' },
-];
 
 function openPage(id) {
   var pg = document.getElementById(id);
@@ -986,6 +980,14 @@ function closePage(id) {
 }
 
 function openCalendar() {
+  var n = active ? N[active] : null;
+  if (n && n.formUrl) {
+    var iframe = document.querySelector('#book-page iframe');
+    if (iframe && iframe.src !== n.formUrl) iframe.src = n.formUrl;
+    document.getElementById('book-heading').textContent = n.name;
+  } else {
+    document.getElementById('book-heading').textContent = 'Book a Tour';
+  }
   var pg = document.getElementById('book-page');
   pg.style.display = 'block';
   pg.scrollTop = 0;
@@ -995,56 +997,8 @@ function closeCalendar() {
   document.getElementById('book-page').style.display = 'none';
 }
 
-function renderCalendar() {
-  var grid        = document.getElementById('cal-grid');
-  if (!grid) return;
-  grid.innerHTML  = '';
-  var firstDay    = new Date(calYear, calMonth, 1).getDay();
-  var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-
-  var byDate = {};
-  EVENTS.forEach(function (e) {
-    if (!byDate[e.date]) byDate[e.date] = [];
-    byDate[e.date].push(e);
-  });
-
-  for (var i = 0; i < firstDay; i++) {
-    var blank = document.createElement('div');
-    blank.className = 'cal-day';
-    grid.appendChild(blank);
-  }
-
-  for (var d = 1; d <= daysInMonth; d++) {
-    var ds   = calYear + '-' + pad2(calMonth + 1) + '-' + pad2(d);
-    var cell = document.createElement('div');
-    var cls  = 'cal-day in-month';
-    if (byDate[ds])         cls += ' has-event';
-    if (calSelected === ds) cls += ' active';
-    cell.className   = cls;
-    cell.textContent = d;
-    if (byDate[ds]) {
-      (function (key) { cell.onclick = function () { selectDate(key); }; })(ds);
-    }
-    grid.appendChild(cell);
-  }
-}
 
 </script>
 
-<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js" type="text/javascript"></script>
-<script>
-(function initEB() {
-  if (window.EBWidgets) {
-    window.EBWidgets.createWidget({
-      widgetType: 'checkout',
-      eventId: '1992024847944',
-      iframeContainerId: 'eventbrite-widget-container-1992024847944',
-      iframeHeight: 425,
-    });
-  } else {
-    setTimeout(initEB, 100);
-  }
-})();
-</script>
 </body>
 </html>
