@@ -858,7 +858,8 @@ function showPage(id) {
   document.getElementById('nbh-stats').innerHTML =
     mkStat('Start point', n.startPoint || '—') +
     mkStat('Duration', n.duration) +
-    mkStat('Distance', n.distance);
+    mkStat('Distance', n.distance) +
+    mkStat('Price', '$29 per person');
 
   function mkLocalGroup(heading, items) {
     if (!items || !items.length) return '';
