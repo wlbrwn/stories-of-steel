@@ -876,7 +876,7 @@ function showPage(id) {
       items.map(function(i){ return '<li>' + i + '</li>'; }).join('') +
       '</ul></div>';
   }
-  var localHtml = mkLocalGroup('Eat', n.food) + mkLocalGroup('Shop', n.shop) + mkLocalGroup('See', n.culture);
+  var localHtml = mkLocalGroup('Eat', n.food) + mkLocalGroup('See', n.culture) + mkLocalGroup('Shop', n.shop);
   var localEl = document.getElementById('nbh-local');
   if (localHtml) {
     localEl.innerHTML = '<h2 class="local-section-heading">Local Favorites</h2><div class="local-grid">' + localHtml + '</div>';
